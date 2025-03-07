@@ -83,88 +83,94 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <Box sx={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
-      <Box sx={{ padding: '20px', maxWidth: 400, paddingLeft: "50px", paddingRight: "50px", margin: '0 auto', borderRadius: "16px", backgroundColor:"white", boxShadow:"0px 4px 6px rgba(0, 0, 0, 0.1)"}}>
-        <h1 style={{color:"black", textAlign:"center"}}>Task Manager</h1>
+      <Box sx={{position: "absolute", left: "50%", transform: "translate(-50%, -50%)"}}>
+        <Box sx={{ padding: '20px', minWidth: 400, maxWidth: 400, paddingLeft: "50px", paddingRight: "50px", margin: '0 auto', borderRadius: "16px", backgroundColor:"white", boxShadow:"0px 4px 6px rgba(0, 0, 0, 0.1)"}}>
+          <h1 style={{color:"black", textAlign:"center"}}>Task Manager</h1>
 
-        {/* Task input field */}
-        <TextField
-          label={editingTaskId ? 'Edit Task' : 'New Task'}
-          variant="outlined"
-          fullWidth
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-          sx={{ marginBottom: 2, }}
-          data-testid="task-input"
-        />
-
-        {/* Add or Save task button */}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={editingTaskId ? handleSaveEdit : handleAddTask}
-          fullWidth
-          data-testid="add-task-button"
-        >
-          {editingTaskId ? 'Save Edit' : 'Add Task'}
-        </Button>
-
-        {/* Navigation Links */}
-        <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'center', gap: '10px' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <Button variant="outlined" data-testid="all-tasks-link">
-              All Tasks
-            </Button>
-          </Link>
-          <Link to="/active" style={{ textDecoration: 'none' }}>
-            <Button variant="outlined" data-testid="active-tasks-link">
-              Active Tasks
-            </Button>
-          </Link>
-          <Link to="/completed" style={{ textDecoration: 'none' }}>
-            <Button variant="outlined" data-testid="completed-tasks-link">
-              Completed Tasks
-            </Button>
-          </Link>
-        </Box>     
-
-        {/* Routes */}
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <TaskList
-                tasks={tasks}
-                handleToggleComplete={handleToggleComplete}
-                handleRemoveTask={handleRemoveTask}
-                handleEditTask={handleEditTask}
-              />
-            }
+          {/* Task input field */}
+          <TextField
+            label={editingTaskId ? 'Edit Task' : 'New Task'}
+            variant="outlined"
+            fullWidth
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            sx={{ marginBottom: 2, }}
+            data-testid="task-input"
           />
-          <Route
-            path="/active"
-            element={
-              <TaskList
-                tasks={tasks.filter((task) => !task.completed)}
-                handleToggleComplete={handleToggleComplete}
-                handleRemoveTask={handleRemoveTask}
-                handleEditTask={handleEditTask}
-              />
-            }
-          />
-          <Route
-            path="/completed"
-            element={
-              <TaskList
-                tasks={tasks.filter((task) => task.completed)}
-                handleToggleComplete={handleToggleComplete}
-                handleRemoveTask={handleRemoveTask}
-                handleEditTask={handleEditTask}
-              />
-            }
-          />
-        </Routes>
-      </Box>
+
+          {/* Add or Save task button */}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={editingTaskId ? handleSaveEdit : handleAddTask}
+            fullWidth
+            sx={{
+              borderRadius: '20px', // Rounded corners
+              '&:hover': {
+                backgroundColor: 'error', // Hover color effect
+              },
+            }}
+          >
+            {editingTaskId ? 'Save Edit' : 'Add Task'}
+          </Button>
+
+          {/* Navigation Links */}
+          <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'center', gap: '10px' }}>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <Button variant="outlined" data-testid="all-tasks-link">
+                All Tasks
+              </Button>
+            </Link>
+            <Link to="/active" style={{ textDecoration: 'none' }}>
+              <Button variant="outlined" data-testid="active-tasks-link">
+                Active Tasks
+              </Button>
+            </Link>
+            <Link to="/completed" style={{ textDecoration: 'none' }}>
+              <Button variant="outlined" data-testid="completed-tasks-link">
+                Completed Tasks
+              </Button>
+            </Link>
+          </Box>     
+        
+          {/* Routes */}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <TaskList
+                  tasks={tasks}
+                  handleToggleComplete={handleToggleComplete}
+                  handleRemoveTask={handleRemoveTask}
+                  handleEditTask={handleEditTask}
+                />
+              }
+            />
+            <Route
+              path="/active"
+              element={
+                <TaskList
+                  tasks={tasks.filter((task) => !task.completed)}
+                  handleToggleComplete={handleToggleComplete}
+                  handleRemoveTask={handleRemoveTask}
+                  handleEditTask={handleEditTask}
+                />
+              }
+            />
+            <Route
+              path="/completed"
+              element={
+                <TaskList
+                  tasks={tasks.filter((task) => task.completed)}
+                  handleToggleComplete={handleToggleComplete}
+                  handleRemoveTask={handleRemoveTask}
+                  handleEditTask={handleEditTask}
+                />
+              }
+            />
+          </Routes>
+          
+        </Box>
       </Box>
     </Router>
   );

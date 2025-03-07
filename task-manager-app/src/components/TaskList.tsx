@@ -34,11 +34,11 @@ const TaskList: React.FC<TaskListProps> = ({
           <Button
             variant="outlined"
             onClick={() => handleEditTask(task.id, task.name)}
-            sx={{ marginRight: 2 }}
+            sx={{ marginRight: 2, '&:hover':{ borderColor: '#4CAF50', color: '#4CAF50', transition: 'all 0.3s ease'} }}
           >
             Edit
           </Button>
-          <Button variant="outlined" color="error" onClick={() => handleRemoveTask(task.id)}>
+          <Button variant="outlined" color="error" onClick={() => handleRemoveTask(task.id)} sx={{'&:hover': {borderColor: '#FF6347', color: '#FF6347', backgroundColor: '#FFEBEB', transition: 'all 0.3s ease'}}}>
             Remove
           </Button>
         </ListItem>
